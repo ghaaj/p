@@ -1,12 +1,170 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Refresh" content="0; URL=https://www.github.com/ghaaj/p">
-    <title>//ghaaj.github.io/p</title>
+  <title>YouTube Embedded Video Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="description" content="This app embeds YouTube videos in youtu.be format." />
+  <!-- <link rel="icon" href="assets/img/favicon.ico" sizes="256x256" type="image/x-icon" /> -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
 </head>
+
 <body>
+  <div class="wrapper">
+    <div id="Title">
+      <h1><a href="./" alt="link to home" id="H1">YouTube Embedded Video Generator</a></h1>
+    </div>
+    <div id="Desc">
+      <p style="transform: rotate(0.03deg);">This app embeds YouTube videos in youtu.be format.</p>
+      <div>
+        <span>Allowed URL patterns</span>&nbsp;
+        <span id="PToggle">
+          <span>[</span><a href="javascript:void(0);" alt="show/hide" id="Toggle"
+            onclick="ShowList();">show</a><span>]</span>
+        </span>
+        <ul id="List" class="hide">
+          <li> http(s)://(www.)youtube.com/watch?[.*]</li>
+          <li> http(s)://m.youtube.com/watch?[.*]</li>
+          <li> http(s)://(www.)youtube.com/tv#/watch?[.*]</li>
+          <li> http(s)://m.youtube.com/tv#/watch?[.*]</li>
+          <li> http(s)://(www.)youtube.com/v/[.*]</li>
+          <li> http(s)://m.youtube.com/v/[.*]</li>
+          <li> http(s)://youtu.be/[.*]</li>
+          <li> http(s)://(www.)youtube.com/embed/[.*]</li>
+          <li> http(s)://m.youtube.com/embed/[.*]</li>
+          <li> http(s)://(www.)youtube-nocookie.com/embed/[.*]</li>
+          <li> http(s)://(www.)youtube.com/videoseries?[.*]</li>
+          <li> http(s)://m.youtube.com/videoseries?[.*]</li>
+          <li> http(s)://(www.)youtube.com/playlist?[.*]</li>
+          <li> http(s)://m.youtube.com/playlist?[.*]</li>
+        </ul>
+      </div>
+    </div>
+    <noscript>
+      <span style="color: red; font-size: 24px;">For full functionality of this site it is necessary to enable
+        JavaScript.
+        Here are the </span><a href="https://www.enable-javascript.com/">
+        instructions how to enable JavaScript in your web browser</a><span style="color:red;">.</span>
+    </noscript>
+    <form id="Form" action="" method="get">
+      <input type="text" id="Input" name="q" placeholder="Enter the URL of the video you want to watch."
+        pattern="(https?:)?\/\/((www\.|m\.)?youtube\.com\/(embed(\/videoseries)?(\/)?\??|v\/|(tv#\/)?watch(\/)?\?|playlist\?)|youtu\.be\/|(www\.)?youtube-nocookie.com\/embed(\/videoseries)?\/?\??).*"
+        autofocus required /><button type="submit" id="Button">Submit</button>
+    </form>
+    <div id="OutputDiv">
+      <div id="OutputPlaceholder">
+        <p style="transform: rotate(0.03deg);">The video with the URL you enter will appear here.</p>
+      </div>
+      <iframe id="Iframe" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div id="Bookmarklet">
+      <h2>Bookmarklet</h2>
+      <h3><a
+          href="javascript:(function()%7Blet Location %3D location.href%3B%0Alet RegUrl %3D new RegExp(%2F(https%3F%3A)%3F%5C%2F%5C%2F((www%5C.%7Cm%5C.)%3Fyoutube%5C.com%5C%2F(embed(%5C%2Fvideoseries)%3F(%5C%2F)%3F%5C%3F%3F%7Cv%5C%2F%7C(tv%23%5C%2F)%3Fwatch(%5C%2F)%3F%5C%3F%7Cplaylist%5C%3F)%7Cyoutu%5C.be%5C%2F%7C(www%5C.)%3Fyoutube-nocookie.com%5C%2Fembed(%5C%2Fvideoseries)%3F%5C%2F%3F%5C%3F%3F).*%2F)%3B%0Aif(RegUrl.test(Location))%7B%0A  location.href%3D 'https%3A%2F%2Fghaaj.github.io%2FYouTube_Embedded_Video_Generator%3Fq%3D' %2B encodeURIComponent(Location)%3B%0A%7D else %7B%0A  alert('Invalid URL was detected. Check if this page has the correct URL.')%3B%0A%7D%7D)()%3B"
+          class="txtlink">Launch web app</a></h3>
+      <textarea readonly cols="50" rows="5" class="bookmarklet">
+let Location = location.href;
+let RegUrl = new RegExp(/(https?:)?\/\/((www\.|m\.)?youtube\.com\/(embed(\/videoseries)?(\/)?\??|v\/|(tv#\/)?watch(\/)?\?|playlist\?)|youtu\.be\/|(www\.)?youtube-nocookie.com\/embed(\/videoseries)?\/?\??).*/);
+if(RegUrl.test(Location)){
+  location.href= 'https://ghaaj.github.io/YouTube_Embedded_Video_Generator?q=' + encodeURIComponent(Location);
+} else {
+  alert('Invalid URL was detected. Check if this page has the correct URL.');
+}
+      </textarea>
+      <h3><a
+          href="javascript:(function()%7Blet Iframe %3D document.getElementsByTagName('iframe')%3B%0Alet RegUrl %3D new RegExp(%2F%5E(https%3F%3A)%3F%5C%2F%5C%2F((www%5C.%7Cm%5C.)%3Fyoutube%5C.com%5C%2F(embed%5C%2F%7Cv%5C%2F)%7Cyoutu%5C.be%5C%2F%7C(www%5C.)%3Fyoutube-nocookie.com%5C%2Fembed%5C%2F)%2F)%3B%0Alet RegUrlVParam %3D new RegExp(%2F%5E(https%3F%3A)%3F%5C%2F%5C%2F(www%5C.%7Cm%5C.)%3Fyoutube%5C.com%5C%2F(tv%23%5C%2F)%3Fwatch(%5C%2F)%3F%5C%3F%2F)%3B%0Alet RegUrlListEmbed %3D new RegExp(%2F%5E(https%3F%3A)%3F%5C%2F%5C%2F((www%5C.%7Cm%5C.)%3Fyoutube%5C.com%5C%2F(embed(%5C%2Fvideoseries)%3F(%5C%2F)%3F%7Cplaylist)%7C(www%5C.)%3Fyoutube-nocookie%5C.com%5C%2Fembed(%5C%2Fvideoseries)%3F(%5C%2F)%3F)%5C%3F%2F)%3B%0Afor (let i %3D 0%3B i < Iframe.length%3B i%2B%2B) %7B%0A  let Src %3D Iframe%5Bi%5D.getAttribute('src')%3B%0A  let DataSrc %3D Iframe%5Bi%5D.getAttribute('data-src')%3B%0A  if (!Src %26%26 DataSrc) %7B Src %3D DataSrc%3B Iframe%5Bi%5D.removeAttribute('data-src')%3B %7D%0A  if (RegUrl.test(Src) %26%26 Src.replace(RegUrl%2C '').substring(12) !%3D%3D '') %7B%0A    let VideoId %3D Src.replace(RegUrl%2C '').substring(0%2C 11)%3B%0A    let ParamArray %3D Src.replace(RegUrl%2C '').substring(12).split('%26')%3B%0A    let ParamJson %3D %5B%5D%3B%0A    for (let i %3D 0%3B i < ParamArray.length%3B i%2B%2B) %7B%0A      ParamJson.push(ParamArray%5Bi%5D.split('%3D'))%3B%0A    %7D%0A    let AssocArray %3D Object.fromEntries(ParamJson)%3B%0A    AssocArray.feature %3D 'youtu.be'%3B%0A    let Params %3D Object.entries(AssocArray).map(e %3D> e.join('%3D')).join('%26')%3B%0A    Src %3D 'https%3A%2F%2Fwww.youtube.com%2Fembed%2F' %2B VideoId %2B '%3F' %2B Params%3B%0A    Iframe%5Bi%5D.setAttribute('src'%2C Src)%3B%0A  %7D else if (RegUrl.test(Src)) %7B%0A    let VideoId %3D Src.replace(RegUrl%2C '').substring(0%2C 11)%3B%0A    Src %3D 'https%3A%2F%2Fwww.youtube.com%2Fembed%2F' %2B VideoId %2B '%3Ffeature%3Dyoutu.be'%3B%0A    Iframe%5Bi%5D.setAttribute('src'%2C Src)%3B%0A  %7D else if (RegUrlVParam.test(Src) %26%26 Src.replace(RegUrlVParam%2C '') !%3D%3D '') %7B%0A    let ParamArray %3D Src.replace(RegUrlVParam%2C '').split('%26')%3B%0A    let ParamJson %3D %5B%5D%3B%0A    for (let i %3D 0%3B i < ParamArray.length%3B i%2B%2B) %7B%0A      ParamJson.push(ParamArray%5Bi%5D.split('%3D'))%3B%0A    %7D%0A    let AssocArray %3D Object.fromEntries(ParamJson)%3B%0A    AssocArray.feature %3D 'youtu.be'%3B%0A    let VideoId %3D AssocArray.v%3B%0A    delete AssocArray.v%3B%0A    let Params %3D Object.entries(AssocArray).map(e %3D> e.join('%3D')).join('%26')%3B%0A    Src %3D 'https%3A%2F%2Fwww.youtube.com%2Fembed%2F' %2B VideoId %2B '%3F' %2B Params%3B%0A    Iframe%5Bi%5D.setAttribute('src'%2C Src)%3B%0A  %7D else if (RegUrlListEmbed.test(Src) %26%26 Src.replace(RegUrlListEmbed%2C '') !%3D%3D '') %7B%0A    let ParamArray %3D Src.replace(RegUrlListEmbed%2C '').split('%26')%3B%0A    let ParamJson %3D %5B%5D%3B%0A    for (let i %3D 0%3B i < ParamArray.length%3B i%2B%2B) %7B%0A    ParamJson.push(ParamArray%5Bi%5D.split('%3D'))%3B%0A  %7D%0A    let AssocArray %3D Object.fromEntries(ParamJson)%3B%0A    AssocArray.feature %3D 'youtu.be'%3B%0A    let Params %3D Object.entries(AssocArray).map(e %3D> e.join('%3D')).join('%26')%3B%0A    Src %3D 'https%3A%2F%2Fwww.youtube.com%2Fembed%3F' %2B Params%3B%0A    Iframe%5Bi%5D.setAttribute('src'%2C Src)%3B%0A  %7D else %7B%0A    alert('Failed to check if the correct YouTube URL was inserted in the src attribute of the iframe element%5B' %2B i %2B '%5D.')%3B%0A  %7D%0A%7D%7D)()%3B"
+          class="txtlink">Run on other pages</a></h3>
+      <textarea readonly cols="50" rows="5" class="bookmarklet">
+let Iframe = document.getElementsByTagName('iframe');
+let RegUrl = new RegExp(/^(https?:)?\/\/((www\.|m\.)?youtube\.com\/(embed\/|v\/)|youtu\.be\/|(www\.)?youtube-nocookie.com\/embed\/)/);
+let RegUrlVParam = new RegExp(/^(https?:)?\/\/(www\.|m\.)?youtube\.com\/(tv#\/)?watch(\/)?\?/);
+let RegUrlListEmbed = new RegExp(/^(https?:)?\/\/((www\.|m\.)?youtube\.com\/(embed(\/videoseries)?(\/)?|playlist)|(www\.)?youtube-nocookie\.com\/embed(\/videoseries)?(\/)?)\?/);
+for (let i = 0; i < Iframe.length; i++) {
+  let Src = Iframe[i].getAttribute('src');
+  let DataSrc = Iframe[i].getAttribute('data-src');
+  if (!Src && DataSrc) { Src = DataSrc; Iframe[i].removeAttribute('data-src'); }
+  if (RegUrl.test(Src) && Src.replace(RegUrl, '').substring(12) !== '') {
+    let VideoId = Src.replace(RegUrl, '').substring(0, 11);
+    let ParamArray = Src.replace(RegUrl, '').substring(12).split('&');
+    let ParamJson = [];
+    for (let i = 0; i < ParamArray.length; i++) {
+      ParamJson.push(ParamArray[i].split('='));
+    }
+    let AssocArray = Object.fromEntries(ParamJson);
+    AssocArray.feature = 'youtu.be';
+    let Params = Object.entries(AssocArray).map(e => e.join('=')).join('&');
+    Src = 'https://www.youtube.com/embed/' + VideoId + '?' + Params;
+    Iframe[i].setAttribute('src', Src);
+  } else if (RegUrl.test(Src)) {
+    let VideoId = Src.replace(RegUrl, '').substring(0, 11);
+    Src = 'https://www.youtube.com/embed/' + VideoId + '?feature=youtu.be';
+    Iframe[i].setAttribute('src', Src);
+  } else if (RegUrlVParam.test(Src) && Src.replace(RegUrlVParam, '') !== '') {
+    let ParamArray = Src.replace(RegUrlVParam, '').split('&');
+    let ParamJson = [];
+    for (let i = 0; i < ParamArray.length; i++) {
+      ParamJson.push(ParamArray[i].split('='));
+    }
+    let AssocArray = Object.fromEntries(ParamJson);
+    AssocArray.feature = 'youtu.be';
+    let VideoId = AssocArray.v;
+    delete AssocArray.v;
+    let Params = Object.entries(AssocArray).map(e => e.join('=')).join('&');
+    Src = 'https://www.youtube.com/embed/' + VideoId + '?' + Params;
+    Iframe[i].setAttribute('src', Src);
+  } else if (RegUrlListEmbed.test(Src) && Src.replace(RegUrlListEmbed, '') !== '') {
+    let ParamArray = Src.replace(RegUrlListEmbed, '').split('&');
+    let ParamJson = [];
+    for (let i = 0; i < ParamArray.length; i++) {
+    ParamJson.push(ParamArray[i].split('='));
+  }
+    let AssocArray = Object.fromEntries(ParamJson);
+    AssocArray.feature = 'youtu.be';
+    let Params = Object.entries(AssocArray).map(e => e.join('=')).join('&');
+    Src = 'https://www.youtube.com/embed?' + Params;
+    Iframe[i].setAttribute('src', Src);
+  } else {
+    alert('Failed to check if the correct YouTube URL was inserted in the src attribute of the iframe element[' + i + '].');
+  }
+}
+      </textarea>
+    </div>
+    <footer>
+      <hr />
+      <div class="flexContent">
+        <div class="license">
+          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="imglink"><img
+              alt="Creative Commons License" style="border-width:0" src="assets/img/CC-BY_icon.svg" width="88px"
+              height="31px" /></a><br />This work is
+          licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="txtlink">Creative
+            Commons
+            Attribution 4.0 International License</a>.
+        </div>
+        <div class="GitHubIcon">
+          <a alt="link to GitHub" href="https://www.github.com/jinssai/YouTube_Embedded_Video_Generator"
+            class="imglink"><img src="assets/img/GitHub_icon.svg" width="50px" height="50px" /></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/js/submit.js"></script>
+  <script>
+    function ShowList() {
+      document.getElementById('List').classList.toggle('hide');
+      let Toggle = document.getElementById('Toggle');
+      switch (Toggle.innerHTML) {
+        case 'show':
+          Toggle.innerHTML = 'hide';
+          break;
+        case 'hide':
+          Toggle.innerHTML = 'show';
+          break;
+      }
+    }
+  </script>
 </body>
+
 </html>
