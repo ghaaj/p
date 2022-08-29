@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="Refresh" content="5; URL=https://ghaaj.github.io/p">
     <title>404 Not Found</title>
+    <link rel="stylesheet" type="text/css"
+        href="http://mplus-fonts.sourceforge.jp/webfonts/basic_latin/mplus_webfonts.css">
+    <style>
+        body {
+            font-family: 'M+ P Type-1 (basic latin) Regular';
+        }
+    </style>
 </head>
+
 <body>
-   <h1>404 not found</h1>
-    <p>Page not found. You'll be redirected to the top page in 10 seconds.</p>
+    <h1>404 not found</h1>
+    <p>Page not found. You'll be redirected to the top page in <span id="s">5</span> seconds.</p>
+    <script>
+        function Countdown() {
+            document.getElementById('s').innerHTML = String(Number(document.getElementById('s').innerHTML) - 1);
+        }
+        setInterval(Countdown, 1000);
+    </script>
 </body>
+
 </html>
