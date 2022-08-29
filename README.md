@@ -1,2 +1,2 @@
 # p
-Redirects to other projects
+Redirect to other projects
