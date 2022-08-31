@@ -1,2 +1,2 @@
 # p
-Redirect to other projects
+Redirect to other repositories
